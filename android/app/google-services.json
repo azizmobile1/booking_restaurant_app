@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "125337987586",
+    "project_id": "booking-restaurant-app-63945",
+    "storage_bucket": "booking-restaurant-app-63945.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125337987586:android:160c8e7444749e351e551b",
+        "android_client_info": {
+          "package_name": "com.example.booking_restaurant_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkjlP2KSI2p1f8sSdHASTocnl9qQx8Prk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
