@@ -1,4 +1,3 @@
-import 'package:booking_restaurant_app/features/history/data/models/booking_model.dart';
 import 'package:booking_restaurant_app/features/history/presentation/screens/provider/booking_provider.dart';
 import 'package:booking_restaurant_app/features/home/presentation/bloc/restaurant_bloc.dart';
 import 'package:booking_restaurant_app/features/home/presentation/bloc/restaurant_event.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'menu_screen.dart';
+import 'detail_screen.dart'; // Yangi ekran uchun import
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,9 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Booking> bookingHistory = [];
-  Set<String> bookedRestaurants = {};
-
   @override
   void initState() {
     super.initState();
@@ -33,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return "${place.street}, ${place.subLocality}, ${place.locality}";
       }
     } catch (e) {
+      // ignore: avoid_print
       print("Error getting address: $e");
     }
     return "Unknown Location";
@@ -40,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -353,32 +350,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                             .contains(restaurant.id)
                                         ? Colors.grey
                                         : Colors.green,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
                                   ),
-                                  onPressed: () async {
-                                    String address = await getAddressFromLatLng(
-                                      restaurant.lat,
-                                      restaurant.lng,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => DetailScreen(
+                                          restaurant: restaurant,
+                                        ),
+                                      ),
                                     );
-
-                                    context
-                                        .read<BookingProvider>()
-                                        .toggleBooking(
-                                          id: restaurant.id,
-                                          name: restaurant.name,
-                                          imageUrl: restaurant.imageUrl,
-                                          lat: restaurant.lat,
-                                          lng: restaurant.lng,
-                                          address: address,
-                                        );
                                   },
-                                  child: Text(
-                                    context
-                                            .watch<BookingProvider>()
-                                            .bookedRestaurants
-                                            .contains(restaurant.id)
-                                        ? "Booked"
-                                        : "Book",
-                                  ),
+                                  child: const Text("Book"),
                                 ),
                               ],
                             ),

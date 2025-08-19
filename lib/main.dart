@@ -1,6 +1,7 @@
 import 'package:booking_restaurant_app/features/auth/presentation/injection_container.dart'
     as di;
 import 'package:booking_restaurant_app/features/auth/presentation/screens/on_boarding_screen.dart';
+import 'package:booking_restaurant_app/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:booking_restaurant_app/features/history/presentation/screens/provider/booking_provider.dart';
 import 'package:booking_restaurant_app/features/home/presentation/bloc/restaurant_bloc.dart';
 import 'package:booking_restaurant_app/features/home/presentation/bloc/restaurant_event.dart';
@@ -18,9 +19,7 @@ Future<void> main() async {
 
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => BookingProvider()),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => BookingProvider())],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -32,7 +31,6 @@ Future<void> main() async {
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
